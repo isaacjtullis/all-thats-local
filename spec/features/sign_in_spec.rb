@@ -1,4 +1,5 @@
 require 'spec_helper'
+#require 'rails_helper'
 
 feature 'sign up', %Q{
   As an unathenticated user
@@ -7,11 +8,12 @@ feature 'sign up', %Q{
 } do
 
   scenario 'specifying valid information and required information' do
+    #user = FactoryGirl.create(:email)
     visit root_path
     click_link 'Sign Up'
     fill_in 'First Name', with: 'John'
     fill_in 'Last Name', with: 'Smith'
-    fill_in 'Email', with: 'testing@example.com'
+    fill_in 'Email', with: "testing@always.com"
   #why does this test fail if i don't update the password?
     fill_in 'user_password', with: 'password'
     fill_in 'Password Confirmation', with: 'password'
