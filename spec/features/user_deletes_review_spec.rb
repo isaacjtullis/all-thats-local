@@ -1,18 +1,11 @@
 require 'rails_helper'
 
-feature 'creates review', %Q{
-  As an unathenticated user
-  I want to create a review
+feature 'user deletes review', %Q{
+  As a User
+  I want to delete my review
+  So others don't fall for my horrible review
 } do
-
-  scenario 'visitor cannot make a review until they are signed-in' do
-    visit root_path
-    click_link 'Add Review'
-
-    expect(page).to have_content('You must be logged in to make changes!')
-  end
-
-  scenario 'User creates new review for restaurant' do
+  scenario 'User must be logged in to delete a review' do
     user = FactoryGirl.create(:user)
     visit new_user_session_path
 
@@ -20,7 +13,6 @@ feature 'creates review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    visit root_path
     click_link 'Add Review'
 
     fill_in 'Name', with: "Garbanzo Delights"
@@ -28,15 +20,17 @@ feature 'creates review', %Q{
     select('10', :from => 'Price')
     fill_in 'Review', with: 'Delicious!'
     click_button 'Post'
+    visit root_path
+    click_link 'Sign Out'
 
+    visit root_path
+    click_link 'Garbanzo Delights'
+    click_link 'Delete'
 
-    expect(page).to have_content("Garbanzo Delights")
-    expect(page).to have_content("French")
-    expect(page).to have_content("10")
-    expect(page).to have_content("Delicious!")
+    expect(page).to have_content("You must be logged in to make changes!")
   end
 
-  scenario 'User can go back to home screen' do
+  scenario 'User deletes information' do
     user = FactoryGirl.create(:user)
     visit new_user_session_path
 
@@ -44,7 +38,6 @@ feature 'creates review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    visit root_path
     click_link 'Add Review'
 
     fill_in 'Name', with: "Garbanzo Delights"
@@ -54,7 +47,9 @@ feature 'creates review', %Q{
     click_button 'Post'
 
     click_link 'Home'
+    click_link 'Garbanzo Delights'
+    click_link 'Delete'
 
-    expect(page).to have_content("Garbanzo Delights")
+    expect(page).to have_content("Review was deleted")
   end
 end

@@ -1,6 +1,4 @@
-require 'spec_helper'
 require 'rails_helper'
-#require 'rails_helper'
 
 feature 'sign up', %Q{
   As an unathenticated user
@@ -9,14 +7,13 @@ feature 'sign up', %Q{
 } do
 
   scenario 'specifying valid information and required information' do
-    user = FactoryGirl.create(:user)
     visit root_path
     click_link 'Sign Up'
-    fill_in 'First Name', with: user.first_name
-    fill_in 'Last Name', with: user.last_name
-    fill_in 'Email', with: user.email
-    fill_in 'user_password', with: user.password
-    fill_in 'Password Confirmation', with: user.password
+    fill_in 'First Name', with: 'John'
+    fill_in 'Last Name', with: 'Smith'
+    fill_in 'Email', with: 'johnsmith@test.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirmation', with: 'password'
     click_button 'Sign Up'
 
     expect(page).to have_content("You're In!")
@@ -36,8 +33,8 @@ feature 'sign up', %Q{
   scenario 'password confirmation does not match configuration' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'user_password', with: 'password'
-    fill_in 'Password Confirmation', with: 'anotherpassword'
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirmation', with: 'anotherpassword'
 
     click_button 'Sign Up'
 

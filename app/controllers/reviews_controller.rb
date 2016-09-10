@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authorize_user, except: [:index, :show, :new, :create]
+  #before_action :authorize_user, except: [:index, :show, :new, :create, :edit]
   before_action :require_login, except: [:index, :show]
 
   def index
@@ -16,6 +16,25 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
+  def edit
+    @review = Review.find(params[:id])
+    if @review.user_id != current_user.id
+      flash[:notice] = "You cannot edit a review you did not write."
+      redirect_to @review
+    end
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      flash[:notice] = 'Review was successfully updated.'
+      redirect_to @review
+    else
+      flash[:notice] = 'Review as not updated'
+      render :'reviews/edit'
+    end
+  end
+
   def create
     #binding.pry
     @review = Review.new(review_params)
@@ -30,6 +49,20 @@ class ReviewsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    review = Review.find(params[:id])
+
+    if review.user_id != current_user.id
+      flash[:notice] = "You cannot delete a question you did not write."
+      redirect_to question
+    else
+      review.destroy
+      flash[:notice] = "Review was deleted"
+      redirect_to reviews_path
+    end
+  end
+
 
   protected
 

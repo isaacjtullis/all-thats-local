@@ -17,6 +17,7 @@
 #
 require 'capybara/rspec'
 require 'valid_attribute'
+require 'support/factory_girl'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
