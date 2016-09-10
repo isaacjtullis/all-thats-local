@@ -3,46 +3,56 @@ feature 'creates review', %Q{
   I want to create a review
 } do
 
-scenario 'visitor cannot make a review until they are signed-in' do
-  visit root_path
-  click_link 'Add Review'
+  scenario 'visitor cannot make a review until they are signed-in' do
+    visit root_path
+    click_link 'Add Review'
 
-  expect(page).to have_content('You must be logged in to make changes!')
-end
-
-scenario 'User creates new review for restaurant' do
-  visit root_path
-  click_link 'Add Review'
-
-  fill_in 'Name', with: 'Garbanzo Delights'
-  select 'French', from: 'Cusine'
-  select 5, from: 'Rating'
-  select "$15-20", from: 'Price'
-  fill_in 'Review', with: 'Delicious!'
-  click_button 'Post'
-
-  expect(page).to have_content('Garbanzo Delights')
-  expect(page).to have_content('Sign Out')
-#I need a simple_form
-#I need to have select down options
-#I need a section to add reviews
-#Can I add a photo?
+    expect(page).to have_content('You must be logged in to make changes!')
   end
-scenario 'User has to sign-in before they can make a review'
+
+  scenario 'User creates new review for restaurant' do
+    user = FactoryGirl.create(:user)
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Sign In'
+
+    visit root_path
+    click_link 'Add Review'
+
+    fill_in 'Name', with: "Garbanzo Delights"
+    fill_in 'Cusine', with: "French"
+    fill_in 'Price', with: "$$$"
+    fill_in 'Review', with: 'Delicious!'
+    click_button 'Post'
+
+
+    expect(page).to have_content("Garbanzo Delights")
+    expect(page).to have_content("French")
+    expect(page).to have_content("$$$")
+    expect(page).to have_content("Delicious!")
+  end
+
+  scenario 'User can go back to home screen' do
+    user = FactoryGirl.create(:user)
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Sign In'
+
+    visit root_path
+    click_link 'Add Review'
+
+    fill_in 'Name', with: "Garbanzo Delights"
+    fill_in 'Cusine', with: "French"
+    fill_in 'Price', with: "$$$"
+    fill_in 'Review', with: 'Delicious!'
+    click_button 'Post'
+
+    click_link 'Home'
+
+    expect(page).to have_content("Garbanzo Delights")
+  end
 end
-=begin
-reviews
-  name
-  cusine
-  rating
-  review
-  user_id
-  *Authenticate if it is admin or not
-
-users
-
-comments
-  *Need to be signed in
-  user_id ?
-  review_id
-=end

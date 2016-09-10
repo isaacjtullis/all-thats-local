@@ -1,1 +1,7 @@
 <%= link_to 'Add Review', new_review_path %>
+<%#= binding.pry %>
+
+
+<% @reviews.each do |review| %>
+  <li><%= link_to "#{review.name}", review_path(review.id) %></li>
+<% end %>

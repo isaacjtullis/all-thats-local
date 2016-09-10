@@ -1,0 +1,27 @@
+<h1>New City Review</h1>
+
+<%= form_for(@review) do |f|  %>
+  <div class="row">
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="row">
+    <%= f.label :cusine, 'Cusine' %>
+    <%= f.text_field :cusine %>
+  </div>
+
+  <div class="row">
+    <%= f.label :price, 'Price' %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="row">
+    <%= f.label :review, 'Review' %>
+    <%= f.text_field :review %>
+  </div>
+
+  <div class="row">
+    <%= f.submit "Post" %>
+  </div>
+<% end %>
