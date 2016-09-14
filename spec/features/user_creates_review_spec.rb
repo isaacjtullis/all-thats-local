@@ -7,7 +7,7 @@ feature 'creates review', %Q{
 
   scenario 'visitor cannot make a review until they are signed-in' do
     visit root_path
-    click_link 'Add Review'
+    click_link 'Share Your Own Adventure'
 
     expect(page).to have_content('You must be logged in to make changes!')
   end
@@ -21,7 +21,7 @@ feature 'creates review', %Q{
     click_button 'Sign In'
 
     visit root_path
-    click_link 'Add Review'
+    click_link 'Share Your Own Adventure'
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')
@@ -45,7 +45,7 @@ feature 'creates review', %Q{
     click_button 'Sign In'
 
     visit root_path
-    click_link 'Add Review'
+    click_link 'Share Your Own Adventure'
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')
@@ -53,7 +53,11 @@ feature 'creates review', %Q{
     fill_in 'Review', with: 'Delicious!'
     click_button 'Post'
 
-    click_link 'Home'
+    visit root_path
+
+    click_link "Share Your Own Adventure"
+
+    click_link 'Back'
 
     expect(page).to have_content("Garbanzo Delights")
   end

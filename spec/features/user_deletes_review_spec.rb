@@ -13,7 +13,7 @@ feature 'user deletes review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    click_link 'Add Review'
+    click_link 'Share Your Own Adventure'
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')
@@ -38,7 +38,7 @@ feature 'user deletes review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    click_link 'Add Review'
+    click_link 'Share Your Own Adventure'
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')
@@ -46,8 +46,6 @@ feature 'user deletes review', %Q{
     fill_in 'Review', with: 'Delicious!'
     click_button 'Post'
 
-    click_link 'Home'
-    click_link 'Garbanzo Delights'
     click_link 'Delete'
 
     expect(page).to have_content("Review was deleted")

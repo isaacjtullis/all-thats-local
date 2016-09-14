@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'simple_form'
 gem 'devise'
+gem 'bootstrap', '~> 4.0.0.alpha3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -36,7 +37,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'launchy'
   gem "factory_girl_rails", "~> 4.0"
   gem 'valid_attribute'
   gem 'launchy'

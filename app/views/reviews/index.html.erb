@@ -1,7 +1,29 @@
-<%= link_to 'Add Review', new_review_path %>
 <%#= binding.pry %>
+<%= stylesheet_link_tag    'application', media: 'all' %>
+<%= javascript_include_tag 'application' %>
+<link rel="stylesheet" href="index" />
+
+<div class="container">
+  <div class="row">
+    <div class="text-center"><h1>CHOOSE YOUR OWN ADVENTURE</h1></div>
+  </div>
+
+  <div class="container">
+    <img src="http://static1.squarespace.com/static/54b2fe58e4b07e1bade096ca/t/5564eb3de4b0a87d403b00c7/1432677190565/?format=2500w" class="img-adventure"/>
+  </div>
+
+  <div class="box">
+    <h1 class="make-new-adventure"><%= link_to 'Share Your Own Adventure', new_review_path %></h1>
+  </div>
+
+  <div class="container">
+    <h1>CITIES</h1>
+    <% @reviews.each do |review| %>
+    <ul>
+      <h3 id="city-names"><li><%= link_to "#{review.name}", review_path(review.id) %></h3></li>
+    </ul>
+    <% end %>
+  </div>
 
 
-<% @reviews.each do |review| %>
-  <li><%= link_to "#{review.name}", review_path(review.id) %></li>
-<% end %>
+</div>

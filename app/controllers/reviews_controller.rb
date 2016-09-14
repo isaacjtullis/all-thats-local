@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  #before_action :authorize_user, except: [:index, :show, :new, :create, :edit]
+  #before_action :authorize_user, except: [:index, :show, :new, :create, :edit, :delete]
   before_action :require_login, except: [:index, :show]
 
   def index

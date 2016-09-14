@@ -13,3 +13,56 @@
  *= require_tree .
  *= require_self
  */
+#bootstrap-overrides {
+  background-color: #ffffff;
+}
+
+.jumbotron-fluid {
+  background-color: #121212;
+}
+
+.row img {
+  display: block;
+  margin: auto;
+  height: 250px;
+  width: 253px;
+}
+
+#bootstrap-overrides .navbar {
+  width: 100%;
+  background-color: #121212;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+#bootstrap-overrides .navbar ul {
+  width: 100%;
+  list-style: none;
+}
+
+#bootstrap-overrides .navbar ul li {
+  width: 25%;
+  float: left;
+}
+
+#bootstrap-overrides .navbar ul li a {
+  display: block;
+  width: 100%;
+  color: white;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: overline;
+  letter-spacing: 2px;
+  font-weight: 5000;
+  font-style: normal;
+  line-height: 1em;
+  padding-left: 80px;
+}
+
+#bootstrap-overrides .devise-authentication-banner {
+  background-color: #B4B8AB;
+}
+#bootstrap-overrides .devise-authentication-banner a {
+  color: black;
+}
