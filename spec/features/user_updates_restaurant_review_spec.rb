@@ -1,9 +1,9 @@
 require 'pry'
 require 'rails_helper'
 
-feature 'user updates review', %Q{
+feature 'user updates restaurant review', %Q{
   As a User
-  I want to update my review
+  I want to update my restaurant review
   So others can see new information
 } do
   scenario 'User updates information' do
