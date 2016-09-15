@@ -55,7 +55,7 @@ class ReviewsController < ApplicationController
 
     if review.user_id != current_user.id
       flash[:notice] = "You cannot delete a question you did not write."
-      redirect_to question
+      redirect_to review
     else
       review.destroy
       flash[:notice] = "Review was deleted"
