@@ -1,6 +1,7 @@
 class Review < ActiveRecord::Base
 
   belongs_to :user
+  has_many :comments
 
   CUSINE = ["French", "Thai", "American"]
   PRICES = ['10','15','20','30','100']

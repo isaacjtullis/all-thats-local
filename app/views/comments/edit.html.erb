@@ -1,0 +1,17 @@
+<%= simple_form_for [@review, @comment] do |f| %>
+  <% if @comment.errors.any? %>
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+      <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <p>
+    <%= f.label :description, "Description" %>
+    <%= f.text_field :description %>
+    <%= f.submit %>
+  </p>
+<% end %>

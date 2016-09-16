@@ -8,12 +8,13 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
-    #@cusine = Review::CUSINE
-    #@price = Review::PRICE
   end
 
   def show
     @review = Review.find(params[:id])
+    @comment = Comment.new
+
+    @comments = Comment.where(review_id: @review.id)
   end
 
   def edit
@@ -55,7 +56,7 @@ class ReviewsController < ApplicationController
 
     if review.user_id != current_user.id
       flash[:notice] = "You cannot delete a question you did not write."
-      redirect_to review
+      redirect_to review_path
     else
       review.destroy
       flash[:notice] = "Review was deleted"
