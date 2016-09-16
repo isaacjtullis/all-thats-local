@@ -21,6 +21,9 @@
     <ul>
       <h3 id="city-names"><li><%= link_to "#{review.name}", review_path(review.id) %></h3></li>
     </ul>
+      <% if current_user != nil && current_user.admin? %>
+        <%= button_to 'ADMIN DELETE', review, method: :delete %>
+      <% end %>
     <% end %>
   </div>
 </div>

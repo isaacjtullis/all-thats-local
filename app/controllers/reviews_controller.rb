@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  #before_action :authorize_user, except: [:index, :show, :new, :create, :edit, :delete]
+  before_action :authorize_user, except: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :require_login, except: [:index, :show]
 
   def index
@@ -13,13 +13,12 @@ class ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-
     @comments = Comment.where(review_id: @review.id)
   end
 
   def edit
     @review = Review.find(params[:id])
-    if @review.user_id != current_user.id
+    if @review.user_id != current_user.id && !current_user.admin?
       flash[:notice] = "You cannot edit a review you did not write."
       redirect_to @review
     end
@@ -53,8 +52,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     review = Review.find(params[:id])
-
-    if review.user_id != current_user.id
+    if review.user_id != current_user.id && !current_user.admin?
       flash[:notice] = "You cannot delete a question you did not write."
       redirect_to review_path
     else

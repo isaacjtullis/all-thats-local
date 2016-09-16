@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:review_id])
     @review = Review.find(@comment.review_id)
-    if @comment.user_id != current_user.id
+    if @comment.user_id != current_user.id && !current_user.admin?
       flash[:notice] = "You cannot review someone elses comment"
       redirect_to @comment
     end
@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:review_id])
     review = Review.find(params[:id])
-    if comment.user_id != current_user.id
+    if comment.user_id != current_user.id && !current_user.admin?
       flash[:notice] = "You cannot delete a comment you did not make!"
       redirect_to review_path(review)
     else
