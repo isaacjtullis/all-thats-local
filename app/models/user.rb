@@ -13,5 +13,4 @@ class User < ActiveRecord::Base
    role == 'admin'
   end
 
-
 end

@@ -2,7 +2,24 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 <%= javascript_include_tag 'application' %>
 <link rel="stylesheet" href="index" />
+
+<%= form_tag(reviews_path, :method => 'get', id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Reviews" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
 <div class="container">
+  <% if @no_found_reviews %>
+    <h4><%= @no_found_reviews%></h4>
+    <% @search_for_reviews.each do |searched_for_review| %>
+      <li><%= link_to searched_for_review.name, review_path(searched_for_review.id)  %></li>
+    <% end %>
+  <% elsif @search_for_reviews != nil %>
+    <% @search_for_reviews.each do |searched_for_review| %>
+      <%= link_to "The Review you are looking for is: #{searched_for_review.name}", review_path(searched_for_review.id) %>
+    <% end %>
+  <% end %>
+
   <div class="row">
     <div class="text-center"><h1>CHOOSE YOUR OWN ADVENTURE</h1></div>
   </div>
@@ -12,18 +29,30 @@
   </div>
 
   <div class="box">
-    <h1 class="make-new-adventure"><%= link_to 'Share Your Own Adventure', new_review_path %></h1>
+    <h1><%= "SHARE YOUR OWN ADVENTURE!" %></h1>
+  </div>
+
+  <div class="form-wrapper">
+    <%= render "form" %>
   </div>
 
   <div class="container">
-    <h1>CITIES</h1>
+    <h1>Restaurants</h1>
     <% @reviews.each do |review| %>
-    <ul>
-      <h3 id="city-names"><li><%= link_to "#{review.name}", review_path(review.id) %></h3></li>
-    </ul>
+      <ul>
+        <li>
+          <h3 id="city-names"><%= link_to "#{review.name}", review_path(review.id) %></h3>
+          <%= link_to "Delete", review, method: :delete, data: {confirm: 'Are you sure?'},
+          remote: true, class: 'delete review' %>
+        </li>
+      </ul>
       <% if current_user != nil && current_user.admin? %>
         <%= button_to 'ADMIN DELETE', review, method: :delete %>
       <% end %>
     <% end %>
+
+    <%= paginate @reviews %>
+    <%= link_to_next_page @reviews, 'Next Page' %>
+    <%= page_entries_info @reviews %>
   </div>
 </div>

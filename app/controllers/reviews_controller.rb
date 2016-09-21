@@ -1,9 +1,18 @@
 class ReviewsController < ApplicationController
+
   before_action :authorize_user, except: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :require_login, except: [:index, :show]
 
   def index
-    @reviews = Review.all
+    @reviews = Review.order(:name).page params[:page]
+    if params[:search]
+      @search_for_reviews = Review.search(params[:search]).order("name")
+      if @search_for_reviews.count == 0
+        @search_for_reviews = Review.all.order('name')
+        @no_found_reviews = "We couldn't find any reviews matching that result, but here is what we have:"
+      end
+    end
+    @review = Review.new
   end
 
   def new
@@ -13,7 +22,7 @@ class ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.where(review_id: @review.id)
+    @comments = Comment.where(review_id: @review.id).page params[:page]
   end
 
   def edit
@@ -36,7 +45,6 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
@@ -44,8 +52,6 @@ class ReviewsController < ApplicationController
       redirect_to @review
     else
       flash[:alert] = "Your review was not saved!"
-      #@cusine = Review::CUSINE
-      #@price = Review::PRICE
       render :new
     end
   end
@@ -60,6 +66,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review was deleted"
       redirect_to reviews_path
     end
+
   end
 
 

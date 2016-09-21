@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
+      binding.pry
+      CommentMailer.new_comment(@comment).deliver_later
+
       flash[:notice] = "Your comment was saved!"
       redirect_to review_path(@review)
     else

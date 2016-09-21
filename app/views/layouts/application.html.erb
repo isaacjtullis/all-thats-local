@@ -31,7 +31,7 @@
     <nav class="navbar">
       <ul>
         <li><h3><%= link_to 'Home', root_path %></h3></li>
-        <li><h3><%= link_to 'Cities', root_path %></h3></li>
+        <li><h3><%= link_to 'Restaurants', root_path %></h3></li>
         <li><h3><%= link_to 'About Us', '#'%></h3></li>
         <li><h3><%= link_to 'Your Adventure', new_review_path%></h3></li>
       </ul>
@@ -47,14 +47,14 @@
         <% end %>
         </ul>
       </div>
-<% if flash[:notice] %>
-  <h3><%= flash[:notice] %></h3>
-<% end %>
-<% if flash[:alert] %>
-  <h3><%= flash[:alert] %></h3>
-<% end %>
-  <%= yield %>
-
+      <% if flash[:notice] %>
+        <h3><%= flash[:notice] %></h3>
+      <% end %>
+      <% if flash[:alert] %>
+        <h3><%= flash[:alert] %></h3>
+      <% end %>
+    <%= yield %>
+  </body>
 </html>
 
 <!--

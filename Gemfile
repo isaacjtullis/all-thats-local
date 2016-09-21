@@ -29,6 +29,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0.alpha3'
+gem "active_model_serializers"
+gem 'react-rails', '~> 1.0'
+gem 'kaminari'
+gem "pg_search"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -42,6 +46,8 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'valid_attribute'
   gem 'launchy'
+  gem 'email_spec'
+  gem 'mailcatcher'
   gem 'shoulda-matchers', require: false
 end
 

@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  paginates_per 5
+  max_paginates_per 10
+
   belongs_to :user
   belongs_to :review
 

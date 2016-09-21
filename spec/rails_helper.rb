@@ -5,6 +5,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require "email_spec"
+require "email_spec/rspec"
 =begin
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
