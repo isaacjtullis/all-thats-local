@@ -4,7 +4,7 @@ class Review < ActiveRecord::Base
   max_paginates_per 10
 
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   CUSINE = ["French", "Thai", "American"]
   PRICES = ['10','15','20','30','100']
