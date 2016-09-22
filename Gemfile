@@ -33,6 +33,8 @@ gem "active_model_serializers"
 gem 'react-rails', '~> 1.0'
 gem 'kaminari'
 gem "pg_search"
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'fog-aws'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -48,6 +50,7 @@ group :development, :test do
   gem 'launchy'
   gem 'email_spec'
   gem 'mailcatcher'
+  gem 'dotenv-rails'
   gem 'shoulda-matchers', require: false
 end
 
