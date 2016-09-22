@@ -17,12 +17,19 @@
         <p><%= comment.description %><%= link_to ' Edit Comment', edit_review_comment_path(comment.id) %></p>
         <p><%= link_to ' Delete Comment', review_comment_path(comment), method: :delete, data: {confirm: 'Are you sure you want to delete this comment?'}%></p>
       </li>
+      <%= pluralize(comment.favorites.count - comment.down_votes.count, "vote") %>
+
       <% if current_user != nil && current_user.admin? %>
         <%= button_to 'ADMIN DELETE', review_comment_path(comment), method: :delete %>
       <% end %>
+      <%= button_to 'UPVOTE COMMENT', upvote_comment_path(comment), method: :post %>
+      <%= button_to 'DOWNVOTE COMMENT', downvote_comment_path(comment), method: :post %>
     <% end %>
   <% end %>
 </div>
+
+
+
 <%= paginate @comments %>
 
 <h2>New Comment</h2>

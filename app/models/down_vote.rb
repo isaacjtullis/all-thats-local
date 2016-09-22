@@ -1,4 +1,4 @@
-class Favorite < ActiveRecord::Base
+class DownVote < ActiveRecord::Base
   belongs_to :comment
   belongs_to :user
 

@@ -13,6 +13,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments do
+    member do
+      post 'upvote'
+    end
+  end
+
+  resources :comments do
+    member do
+      post 'downvote'
+    end
+  end
+
 
   root 'reviews#index'
 end
