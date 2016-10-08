@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ALL THAT'S LOCAL
 
-Things you may want to cover:
+Project Requirements:
 
-* Ruby version
+The ability to add an item to be reviewed
 
-* System dependencies
+The ability to rate the item and to optionally comment on it
 
-* Configuration
+The ability to Upvote or Downvote a review. A User can only upvote or downvote once and can change
+their vote from up to down.
 
-* Database creation
+A sign up authentication system (With devise)
 
-* Database initialization
+An ability to upload a profile photo (with Carrierwave).
 
-* How to run the test suite
+The ability to search for items
 
-* Services (job queues, cache servers, search engines, etc.)
+An admin role. Admins are able to delete comments or items if they are deemed to be inappropriate.
 
-* Deployment instructions
+An email is sent to the owner of an item when a new review is posted about it.
 
-* ...
+Pagination (with Kaminari).

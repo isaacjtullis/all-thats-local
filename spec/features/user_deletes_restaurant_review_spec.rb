@@ -13,7 +13,7 @@ feature 'user deletes restaurant review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    click_link 'Share Your Own Adventure'
+    find('.adventure').click
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')
@@ -38,7 +38,7 @@ feature 'user deletes restaurant review', %Q{
     fill_in 'Password', with: user.password
     click_button 'Sign In'
 
-    click_link 'Share Your Own Adventure'
+    find('.adventure').click
 
     fill_in 'Name', with: "Garbanzo Delights"
     select('French', :from => 'Cusine')

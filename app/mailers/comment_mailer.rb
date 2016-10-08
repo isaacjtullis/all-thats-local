@@ -1,5 +1,7 @@
 class CommentMailer < ApplicationMailer
+  binding.pry
   def new_comment(comment)
+    binding.pry
     @user_who_commented = User.find(comment.user_id)
     @review = Review.find(comment.review_id)
     @author_of_review = User.find(@review.user_id)
@@ -11,3 +13,11 @@ class CommentMailer < ApplicationMailer
   end
 
 end
+
+
+=begin
+class ApplicationMailer < ActionMailer::Base
+  default from: "\"All That's Local\" <no-reply@example.com>"
+  layout 'mailer'
+end
+=end

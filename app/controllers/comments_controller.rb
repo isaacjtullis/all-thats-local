@@ -3,12 +3,11 @@ class CommentsController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     @comment = Comment.new(comment_params)
-    @comment.review_id = @review.id
     @comment.user_id = current_user.id
-
+    @comment.likes_count = 0
     if @comment.save
+      binding.pry
       CommentMailer.new_comment(@comment).deliver_later
-
       flash[:notice] = "Your comment was saved!"
       redirect_to review_path(@review)
     else
@@ -54,22 +53,42 @@ class CommentsController < ApplicationController
 
   def upvote
     @comment = Comment.find(params[:id])
-    review = @comment.review_id
-
-    if @comment.favorites.create(user_id: current_user.id).save
+    vote = @comment.favorites.where(user_id: current_user.id).last
+    if current_user.has_voted_on?(@comment)
+      @comment.favorites.create(user_id: current_user.id, vote: "upvote").save
+      upvote = @comment[:likes_count] += 1
+      @comment.save
       flash[:notice] = "Thank you for upvoting!"
-      redirect_to review_path(review)
+      redirect_to review_path(@comment.review_id)
+    elsif !current_user.has_voted_on?(@comment) && vote.vote == 'downvote'
+      vote.destroy
+      @comment.favorites.create(user_id: current_user.id, vote: 'upvote').save
+      @comment[:likes_count] += 2
+      @comment.save
+      flash[:notice] = "Thank you for upvoting!"
+      redirect_to review_path(@comment.review_id)
     else
       flash[:notice] = "You have already upvoted this!"
-      redirect_to review_path(review)
+      redirect_to review_path(@comment.review_id)
     end
   end
 
   def downvote
     @comment = Comment.find(params[:id])
     review = @comment.review_id
-    if @comment.down_votes.create(user_id: current_user.id).save
+    vote = @comment.favorites.where(user_id: current_user.id).last
+    if current_user.has_voted_on?(@comment)
+      @comment.favorites.create(user_id: current_user.id, vote: 'downvote').save
+      @comment[:likes_count] -= 1
+      @comment.save
       flash[:notice] = "You have successfully downvoted!"
+      redirect_to review_path(review)
+    elsif !current_user.has_voted_on?(@comment) && vote.vote == 'upvote'
+      vote.destroy
+      @comment.favorites.create(user_id: current_user.id, vote: 'downvote').save
+      @comment[:likes_count] -= 2
+      @comment.save
+      flash[:notice] = 'You have successfully downvoted!'
       redirect_to review_path(review)
     else
       flash[:notice] = "You have already downvoted this!"
@@ -80,15 +99,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:description)
+    params.require(:comment).permit(:description, :review_id, :likes_count)
   end
 end
-=begin
-<%= button_to 'UPVOTE COMMENT', upvote_comment_path(comment), method: :post %>
-<%= button_to 'DOWNVOTE COMMENT', downvote_comment_path(comment), method: :post %>
-
-<%= form_for comment.comment.id.favorites.build, remote: true do |f| %>
-  <%= f.hidden_field :user, value: current_user %>
-  <%= f.submit 'Upvote', class: 'upvote-submit' %>
-<% end %>
-=end

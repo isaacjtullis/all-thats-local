@@ -16,11 +16,11 @@
 //= require react_ujs
 //= require components
 //= require_tree .
- $(function() {
-   $("form#new_comment").submit(function(event) {
-     event.preventDefault();
-     var commentForm = newCommentForm("form#new_comment");
-     var commentCreator = newCommentCreator(commentForm.attributes().description, commentForm.attributes().review, commentForm.attributes().comment_id, "div#comments");
-     commentCreator.create();
-   });
- });
+//$(function() {
+//   $("form#new_comment").submit(function(event) {
+//     event.preventDefault();
+//     var commentForm = newCommentForm("form#new_comment");
+//     var commentCreator = newCommentCreator(commentForm.attributes().description, commentForm.attributes().review, commentForm.attributes().comment_id, "div#comments");
+//     commentCreator.create();
+//   });
+//});

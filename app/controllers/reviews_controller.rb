@@ -23,7 +23,6 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @comment = Comment.new
     @comments = Comment.where(review_id: @review.id).page params[:page]
-
   end
 
   def edit

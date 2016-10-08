@@ -17,17 +17,17 @@
   background-color: #ffffff;
 }
 
-.jumbotron-fluid {
+#bootstrap-overrides .jumbotron-fluid {
   background-color: #121212;
 }
-
-.row img {
+#bootstrap-overrides .jumbotron-fluid p {
+  font-size: 30px;
+  font-family: sans-serif;
   display: block;
+  color: white;
   margin: auto;
-  height: 250px;
-  width: 253px;
+  text-align: center;
 }
-
 #bootstrap-overrides .navbar {
   width: 100%;
   background-color: #121212;

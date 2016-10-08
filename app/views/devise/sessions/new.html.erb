@@ -4,23 +4,17 @@
   <h1><%= link_to 'Home', reviews_path %></h1>
 </div>
 
-<div class="form-signin">
-  <div class="form-signin-heading">
+<div class="form_signin">
+  <div class="form_signin_heading">
     <h2>Log in</h2>
   </div>
+  
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= f.error_notification %>
-  <div class="form-control">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <div class="checkbox">
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-    </div>
-  </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign In" %>
-    </div>
+  <%= f.input :email, required: false, autofocus: true %>
+  <%= f.input :password, required: false %>
+  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <%= f.button :submit, "Sign In" %>
   <% end %>
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
 </div>

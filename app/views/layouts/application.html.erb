@@ -7,25 +7,18 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <title>All That's Local</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript - I AM MISSING A SCRIPT SRC FROM THE TUTORIAL VIDEO googleapis -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
-  <body id="bootstrap-overrides">
 
-      <!-- fixed width = container -->
-      <!-- entire width of the screeen = container-fluid -->
+  <body id="bootstrap-overrides">
     <nav class="jumbotron-fluid">
-        <div class='row'>
-          <img src="http://static1.squarespace.com/static/54b2fe58e4b07e1bade096ca/t/577dc86d893fc05101fe72ba/1473224280201/?format=1500w"/>
-        </div>
+      <p>ALL THATS LOCAL</p>
     </nav>
 
     <nav class="navbar">
@@ -37,330 +30,25 @@
       </ul>
     </nav>
 
-      <div class="devise-authentication-banner">
+    <div class="devise-authentication-banner">
+      <div class="row">
         <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-        <% else %>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+          <% else %>
           <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <li><%= link_to "Sign In", new_user_session_path %>
         <% end %>
         </ul>
       </div>
-      <% if flash[:notice] %>
-        <h3><%= flash[:notice] %></h3>
-      <% end %>
-      <% if flash[:alert] %>
-        <h3><%= flash[:alert] %></h3>
-      <% end %>
-    <%= yield %>
-  </body>
-</html>
-
-<!--
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-  </head>
-  <body>
-
-
-    <div class="wrapper">
-      <header>
-        <div id="banner">
-          <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTejgUAbUk4-8YST-KGT0i8NYUXC2Dic2oAdz_vfB597Lwxo8dk" alt="Width = 100%">
-          <h5 class="display-2">All That's Local</h2>
-        </div>
-      </header>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <span class="d-block bg-primary">
-              <ul>
-              <% if user_signed_in? %>
-                <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-              <% else %>
-                <li><%= link_to "Sign Up", new_user_registration_path %></li>
-                <li><%= link_to "Sign In", new_user_session_path %>
-              <% end %>
-              </ul>
-           </span>
-          </div>
-        </div>
-      </div>
-    <%= yield %>
-  </body>
-</html>
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang"en">
-  <head>
-
-    <title>All That's Local</title>
-     Required meta tags always come first
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-
- Bootstrap CSS
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
-  </head>
-  <body>
-    <p class="notice"><%= flash[:notice] %></p>
-    <p class="alert"><%= alert %></p>
-  <div class="wrapper">
-      <header>
-        <div class="jumbotron jumbotron-fluid" id="banner">
-            <h1 class="display-2">All That's Local</h1>
-        </div>
-      </header>
-  </div>
-    <footer>
-    </footer>
-    <nav>
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign Up", new_user_registration_path %></li>
-          <li><%= link_to "Sign In", new_user_session_path %>
-        <% end %>
-      </ul>
-    </nav>
-
-    <div class="container">
-      <div class="well">This is my first container</div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <title>AllThatsLocal</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-
-  </head>
-
-  <body>
-    <h1>All That's Local</h1>
-    <p class="notice"><%= flash[:notice] %></p>
-    <p class="alert"><%= alert %></p>
-    <nav>
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign Up", new_user_registration_path %></li>
-          <li><%= link_to "Sign In", new_user_session_path %>
-        <% end %>
-      </ul>
-    </nav>
+    <% if flash[:notice] %>
+      <h3><%= flash[:notice] %></h3>
+    <% end %>
+    <% if flash[:alert] %>
+      <h3><%= flash[:alert] %></h3>
+    <% end %>
     <%= yield %>
   </body>
 </html>
-
-
-
-
-THIS IS GOOD CODE!
-LOGO
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a href="#" class="navbar-brand">ALL THATS LOCAL</a>
-</div>
-
-MENU ITEMS
-<div class="collapse navbar-collapse" id="mainNavBar">
-
-LEFT LINE
-
-  <ul class="nav navbar-nav">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Content</a></li>
-
-DROP DOWN MENU
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cities <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Denver</a></li>
-        <li><a href="#">Dallas</a></li>
-        <li><a href="#">San Diego</a></li>
-      </ul>
-    </li>
-
-  </ul>
-
-RIGHT LINE
-  <ul class='nav navbar-nav navbar-right'>
-    <% if user_signed_in? %>
-      <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-    <% else %>
-      <li><%= link_to "Sign Up", new_user_registration_path %></li>
-      <li><%= link_to "Sign In", new_user_session_path %>
-    <% end %>
-  </ul>
-</div>
-</div>
-</nav>
-
-
-
-This is good resource for using bootstrap code
-</ul>
-<div class="container-fluid">
-  <h1>All Thats Local</h1>
- Whenever You make columns, it has to go in rows
-  <div class="row">
-    <div class="col-md-4" style="background-color: #ff9999">Left</div>
-    <div class="col-md-4" style="background-color: #99CCFF">First</div>
-    <div class="col-md-4" style="background-color: #00CC99">Right</div>
-  </div>
-  <p>You can highlight words or <mark>text using mark tags.</mark></p>
-  <blockquote>
-    <p>Sometimes I wet the bed on purpose</p>
-    <footer>My Grandpa</footer>
-  </blockquote>
-
-  <h4>Things to do when you are bored</h4>
-  <dl>
-    <dt>Indoors</dt>
-      <dd>-Take a Nap</dd>
-      <dd>-Watch Tv</dd>
-      <dd>-Watch Netflix for forever</dd>
-    <dt>Outdoors</dt>
-      <dd>-Go Indoors</dd>
-  </dl>
-
-  <p>Set user weight <code>setUserWeight(374);</code> with an integer</p>
-
-  <h4>Build in color classes</h4>
-  <p class=text-muted>Text Muted</p>
-  <p class="bg-success">You Filled it Correctly!</p>
-  <p class="text-danger">You Filled it inCorrectly!</p>
-
-  <h2>Condensed Table</h2>
-  <table class="table">
-    <head>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Points</th>
-      </tr>
-    </head>
-  <tbody>
-  <tr>
-    <td>Bucky Roberts</td>
-    <td>74 years old</td>
-    <td>99 points</td>
-  </tr>
-  <tr>
-    <td>Blade Wade</td>
-    <td>12 years old</td>
-    <td>44 points</td>
-  </tr>
-  <tr>
-    <td>Clint Dint</td>
-    <td>81 years old</td>
-    <td>90 points</td>
-  </tr>
- </tbody>
-</table>
-
-<h2>Condensed Table</h2>
-<table class="table table-condensed">
-  <head>
-    <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Points</th>
-    </tr>
-  </head>
-<tbody>
-<tr>
-  <td>Bucky Roberts</td>
-  <td>74 years old</td>
-  <td>99 points</td>
-</tr>
-<tr>
-  <td>Blade Wade</td>
-  <td>12 years old</td>
-  <td>44 points</td>
-</tr>
-<tr>
-  <td>Clint Dint</td>
-  <td>81 years old</td>
-  <td>90 points</td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Striped Table</h2>
-<table class="table table-striped">
-<head>
-<tr>
-  <th>Name</th>
-  <th>Age</th>
-  <th>Points</th>
-</tr>
-</head>
-<tbody>
-<tr>
-  <td>Bucky Roberts</td>
-  <td>74 years old</td>
-  <td>99 points</td>
-</tr>
-<tr>
-  <td>Blade Wade</td>
-  <td>12 years old</td>
-  <td>44 points</td>
-</tr>
-<tr>
-  <td>Clint Dint</td>
-  <td>81 years old</td>
-  <td>90 points</td>
-</tr>
-</tbody>
-</table>
-
-<div class="container">
-<img src="https://s-media-cache-ak0.pinimg.com/236x/95/15/7c/95157c5212da8d543c9749272f0017e0.jpg" class="img-rounded" width="230" height="230" />
-<img src="https://s-media-cache-ak0.pinimg.com/236x/95/15/7c/95157c5212da8d543c9749272f0017e0.jpg" class="img-circle" width="230" height="230" />
-
-<img src="https://s-media-cache-ak0.pinimg.com/236x/95/15/7c/95157c5212da8d543c9749272f0017e0.jpg" class="img-responsive" width="230" height="230" />
-</div>
-
-</body>
-//-->

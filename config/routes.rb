@@ -7,21 +7,24 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :favorites, only: [:create, :destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :reviews, only: [:new, :create]
+    end
+  end
+=begin
   namespace :api do
     namespace :v1 do
       resources :comments, only: [:index, :create]
     end
   end
-
+=end
   resources :comments do
     member do
-      post 'upvote'
-    end
-  end
-
-  resources :comments do
-    member do
-      post 'downvote'
+      patch 'upvote'
+      patch 'downvote'
     end
   end
 

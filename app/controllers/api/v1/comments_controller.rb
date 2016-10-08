@@ -5,6 +5,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
+    binding.pry
     comment = Comment.new(comment_params)
     comment.user = current_user
     review = comment_params[:review_id]
