@@ -104,4 +104,6 @@ end
 
 =begin
 git checkout -b 'it/issue#2/refactor_upvotes_downvotes' - creating a new feature branch
+make sure to submit changes to that branch not git push origin master
+```no-highlight ``` - creating code in issues on github
 =end

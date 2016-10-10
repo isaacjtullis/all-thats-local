@@ -233,6 +233,7 @@ feature 'review', %Q{
     end
 
     feature 'User already has voted' do
+
       scenario 'User upvoted, cannot upvote again' do
         expect(page).to have_selector('.vote-count', text: '0')
         click_button 'UPVOTE'
@@ -242,6 +243,7 @@ feature 'review', %Q{
         expect(page).to have_selector('.vote-count', text: '1')
         expect(page).to have_content('You have already upvoted this!')
       end
+
       scenario 'User downvoted, cannot downvote again' do
         expect(page).to have_selector('.vote-count', text: '0')
         click_button 'DOWNVOTE'
@@ -250,6 +252,7 @@ feature 'review', %Q{
         click_button 'DOWNVOTE'
         expect(page).to have_content('You have already downvoted this!')
       end
+
       scenario 'User upvoted, they can downvote' do
         expect(page).to have_selector('.vote-count', text: '0')
         click_button 'UPVOTE'
@@ -260,6 +263,7 @@ feature 'review', %Q{
         expect(page).to have_content('You have successfully downvoted!')
         expect(page).to have_selector('.vote-count', text: '-1')
       end
+
       scenario 'User downvoted, they can upvote' do
         expect(page).to have_selector('.vote-count', text: '0')
         click_button 'DOWNVOTE'
@@ -269,6 +273,65 @@ feature 'review', %Q{
 
         expect(page).to have_content('Thank you for upvoting!')
         expect(page).to have_selector('.vote-count', text: '1')
+      end
+    end
+    feature 'Votes work with multiple existing votes' do
+      #GOALS FOR REFACTORING
+      #1. Eliminate manually adding the likes count
+      #2. Put Upvote and Downvote in their own controller
+      before do
+        user = FactoryGirl.create(:user)
+        @review = FactoryGirl.create(:review)
+        @review.user = user
+        @review.save
+        comment = FactoryGirl.create(:comment)
+        @review.comments << comment
+        20.times do
+          random_user = FactoryGirl.create(:user)
+          favorite = FactoryGirl.create(:favorite)
+          favorite.user = random_user
+          favorite.vote = "upvote"
+          favorite.comment = comment
+          favorite.save
+          comment.favorites << favorite
+          comment.likes_count += 1
+          comment.save
+        end
+      end
+      scenario 'User upvotes' do
+        visit review_path(@review.id)
+        expect(page).to have_selector('.vote-count', text: '20')
+        click_button 'UPVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '21')
+      end
+
+      scenario 'User downvotes' do
+        visit review_path(@review.id)
+        expect(page).to have_selector('.vote-count', text: '20')
+        click_button 'DOWNVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '19')
+      end
+      scenario 'User downvotes after upvoting' do
+        visit review_path(@review.id)
+        expect(page).to have_selector('.vote-count', text: '20')
+        click_button 'UPVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '21')
+        click_button 'DOWNVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '19')
+      end
+      scenario 'User upvotes after downvoting' do
+        visit review_path(@review.id)
+        expect(page).to have_selector('.vote-count', text: '20')
+        click_button 'DOWNVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '19')
+        click_button 'UPVOTE'
+
+        expect(page).to have_selector('.vote-count', text: '21')
       end
     end
   end
