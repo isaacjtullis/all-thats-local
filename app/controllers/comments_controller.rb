@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :require_login
 
   def create
     @review = Review.find(params[:review_id])
@@ -95,6 +96,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  protected
+
+  def require_login
+    unless current_user
+      flash[:notice] = "You must be logged in to make changes!"
+      redirect_to root_path
+    end
+  end
+
   private
 
   def comment_params
@@ -104,4 +114,6 @@ end
 
 =begin
 git checkout -b 'it/issue#2/refactor_upvotes_downvotes' - creating a new feature branch
+make sure to submit changes to that branch not git push origin master
+```no-highlight ``` - creating code in issues on github
 =end

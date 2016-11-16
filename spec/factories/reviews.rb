@@ -1,12 +1,11 @@
 FactoryGirl.define do
   factory :review do
     name "Chipotle"
-    cusine "Mexican"
+    cusine "American"
     review "Tasty"
     price "10"
     user_id 1
 
-    association :user, factory: :user
-    association :review, factory: :review
+    association :user
   end
 end
