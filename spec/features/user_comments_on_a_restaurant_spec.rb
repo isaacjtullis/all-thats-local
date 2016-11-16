@@ -186,7 +186,6 @@ feature 'review', %Q{
 
     fill_in 'Description', with: 'Garbanzo Delights is a wonderful restaurant'
     click_button 'Create Comment'
-    binding.pry
     expect(ActionMailer::Base.deliveries.count).to eq(1)
     last_email = ActionMailer::Base.deliveries.last
     expect(last_email).to have_subject('New Review for Garbanzo Delights')

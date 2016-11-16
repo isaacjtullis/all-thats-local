@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.likes_count = 0
     if @comment.save
-      binding.pry
       CommentMailer.new_comment(@comment).deliver_later
       flash[:notice] = "Your comment was saved!"
       redirect_to review_path(@review)
@@ -102,3 +101,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:description, :review_id, :likes_count)
   end
 end
+
+=begin
+git checkout -b 'it/issue#2/refactor_upvotes_downvotes' - creating a new feature branch
+=end

@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   end
 
   def has_voted_on?(comment)
-    #binding.pry
     Favorite.where(comment_id: comment.id, user: self).empty?
   end
 end
