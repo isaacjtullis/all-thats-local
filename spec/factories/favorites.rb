@@ -1,8 +1,5 @@
 FactoryGirl.define do
   factory :favorite do
-    vote 'upvote'
-    association :user
-    association :comment
-
+    comment_id 1
   end
 end
