@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :require_login
 
   def create
     @review = Review.find(params[:review_id])
@@ -92,6 +93,15 @@ class CommentsController < ApplicationController
     else
       flash[:notice] = "You have already downvoted this!"
       redirect_to review_path(review)
+    end
+  end
+
+  protected
+
+  def require_login
+    unless current_user
+      flash[:notice] = "You must be logged in to make changes!"
+      redirect_to root_path
     end
   end
 
